@@ -4,7 +4,7 @@ import sequelize from "./config/index.js";
 
 const app = express();
 const host = 'localhost';
-const port = 8000;
+const port = 8714;
 
 app.use(cors());
 app.use(json());
