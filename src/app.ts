@@ -1,8 +1,14 @@
+import { configDotenv } from 'dotenv'
 import express, { Application, Request, Response } from 'express'
+import { AppDataSoure } from './models/dataSource';
 
-const app: Application = express()
+configDotenv();
+const app: Application = express();
+const port: number = Number(process.env.PORT) || 8000;
 
-const port: number = 3001
+AppDataSoure.initialize()
+    .then(() => { console.log(`DB has initted`) })
+    .catch((err) => { console.error(err) })
 
 app.get('/toto', (req: Request, res: Response) => {
     res.send('Hello toto')
