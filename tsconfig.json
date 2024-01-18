@@ -4,7 +4,7 @@
   },
   "compilerOptions": {
     "preserveValueImports": false,
-    "module": "Node16",
+    "module": "CommonJS",
     "target": "es2021",
     "noImplicitAny": false,
     "sourceMap": true,
