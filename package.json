@@ -2,10 +2,10 @@
   "name": "bmk_be",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
     "build": "npx tsc",
-    "start": "node index.js",
+    "start": "node index.ts",
     "dev": "nodemon src/app.ts"
   },
   "keywords": [],
