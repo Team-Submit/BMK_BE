@@ -3,6 +3,7 @@
     "esm": true
   },
   "compilerOptions": {
+    "esModuleInterop": true,
     "preserveValueImports": false,
     "module": "CommonJS",
     "target": "es2021",
