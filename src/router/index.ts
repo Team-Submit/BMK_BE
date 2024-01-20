@@ -1,7 +1,8 @@
+import express, { Application, Request, Response } from 'express'
 
 const router = express.Router();
 const Used = require('controller/used');
-const Group = require('controller/used');
+const Group = require('controller/group');
 
 router.post('/used/post', Used.used_post);
 router.patch('/used/boards', Used.used_edit);
