@@ -63,9 +63,19 @@ exports.used_details = async (req, res) => {
 
     const used = await usedRepository.findOne(usedId);
 
-    if (used) {
+    if (!used) {
         return res.status(404).json({ message: '글을 찾지 못했습니다.' });
     }
 
     res.json(used);
+};
+
+exports.used_list = async (req, res) => {
+    try {
+        const usedList = await usedRepository.find();
+        res.json(usedList);
+    } catch (error) {
+        console.error('Error while fetching used list:', error);
+        res.status(500).json({ message: '서버에서 목록을 가져오는 중에 오류가 발생했습니다.' });
+    }
 }
