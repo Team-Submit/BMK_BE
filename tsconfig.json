@@ -12,6 +12,7 @@
     "strict": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "esModuleInterop": true,
     "lib": [
       "ES2022"
     ]
