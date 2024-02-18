@@ -19,10 +19,6 @@ enum Floor {
     fifth = '5층'
 }
 
-enum Place {
-    
-}
-
 @Entity()
 export class Used {
     @PrimaryGeneratedColumn()
@@ -43,13 +39,17 @@ export class Used {
     @Column()
     image!: string | null;
 
-    @Column()
+    @Column({
+        default: true // success의 기본값을 true로 설정
+    })
     success!: boolean;
 
     @Column()
     writer!: string;
 
-    @Column()
+    @Column({
+        default: false // wish의 기본값을 false로 설정
+    })
     wish!: boolean | null;
 
     @Column()

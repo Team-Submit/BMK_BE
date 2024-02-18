@@ -4,7 +4,7 @@ import { Used } from "../models/used";
 export const usedRepository = AppDataSoure.getRepository(Used);
 
 
-exports.used_post = async (req, res) => {
+const used_post = async (req, res) => {
     const { title, categori, floor, price, content, image, place, success, writer, wish } = req.body;
 
     const newUsedPost = new Used();
@@ -23,7 +23,7 @@ exports.used_post = async (req, res) => {
     return res.status(200).json(used);
 };
 
-exports.used_edit = async (req, res) => {
+const used_edit = async (req, res) => {
     const { id, title, categori, floor, price, content, image, place, success, writer, wish } = req.body;
 
     if (!id) {
@@ -47,7 +47,7 @@ exports.used_edit = async (req, res) => {
     return res.status(200).json(used);
 };
 
-exports.used_del = async (req, res) => {
+const used_del = async (req, res) => {
     const { id } = req.body;
 
     if (!id) {
@@ -58,7 +58,7 @@ exports.used_del = async (req, res) => {
     return res.status(200).json(used);
 };
 
-exports.used_details = async (req, res) => {
+const used_details = async (req, res) => {
     const usedId = req.params.usedId;
 
     const used = await usedRepository.findOne(usedId);
@@ -70,7 +70,7 @@ exports.used_details = async (req, res) => {
     res.json(used);
 };
 
-exports.used_list = async (req, res) => {
+const used_list = async (req, res) => {
     try {
         const usedList = await usedRepository.find();
         res.json(usedList);
@@ -79,3 +79,5 @@ exports.used_list = async (req, res) => {
         res.status(500).json({ message: '서버에서 목록을 가져오는 중에 오류가 발생했습니다.' });
     }
 }
+
+module.exports = { used_post, used_edit, used_del, used_details, used_list };
