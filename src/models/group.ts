@@ -37,6 +37,16 @@ export class Group {
     @Column()
     transactionDate!: string;
 
+    @Column({
+        default: true // success의 기본값을 true로 설정
+    })
+    success!: boolean;
+
+    @Column({
+        default: false // wish의 기본값을 false로 설정
+    })
+    wish!: boolean | null;
+
     @Column()
     time!: string;
 

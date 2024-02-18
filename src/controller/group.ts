@@ -3,8 +3,8 @@ import { Group } from '../models/group';
 
 export const groupRepository = AppDataSoure.getRepository(Group);
 
-exports.group_post = async (req, res) => {
-    const { title, categori, price, content, image, personnelAll, transactionDate, time} = req.body;
+const group_post = async (req, res) => {
+    const { title, categori, price, content, image, personnelAll, transactionDate, time, success, wish} = req.body;
 
     const newGroupPost = new Group();
     newGroupPost.title = title;
@@ -15,13 +15,15 @@ exports.group_post = async (req, res) => {
     newGroupPost.personnelAll = personnelAll;
     newGroupPost.transactionDate = transactionDate;
     newGroupPost.time = time;
+    newGroupPost.success = success;
+    newGroupPost.wish = wish;
 
     const group = await groupRepository.save(newGroupPost);
     return res.status(200).json(group);
 };
 
-exports.group_edit = async (req, res) => {
-     const {id, title, categori, price, content, image, personnelAll, transactionDate, time} = req.body;
+const group_edit = async (req, res) => {
+     const {id, title, categori, price, content, image, personnelAll, transactionDate, time, success, wish} = req.body;
 
     if (!id) {
         return res.status(400).json({ message: 'id가 올바르지 않습니다.'});
@@ -35,6 +37,8 @@ exports.group_edit = async (req, res) => {
         image,
         personnelAll,
         transactionDate,
+        success,
+        wish,
         time
     };
 
@@ -42,7 +46,7 @@ exports.group_edit = async (req, res) => {
     return res.status(200).json(group);
 };
 
-exports.group_del = async (req, res) => {
+const group_del = async (req, res) => {
     const { id } = req.body;
 
     if (!id) {
@@ -53,7 +57,7 @@ exports.group_del = async (req, res) => {
     return res.status(200).json(group);
 };
 
-exports.group_details = async (req, res) => {
+const group_details = async (req, res) => {
     const groupId = req.params.groupId;
 
     const group = await groupRepository.findOne(groupId);
@@ -65,7 +69,7 @@ exports.group_details = async (req, res) => {
     res.json(group);
 };
 
-exports.group_list = async (req, res) => {
+const group_list = async (req, res) => {
     try {
         const groupList = await groupRepository.find();
         res.json(groupList);
@@ -74,3 +78,5 @@ exports.group_list = async (req, res) => {
         res.status(500).json({ message: '서버에서 목록을 가져오는 중에 오류가 발생했습니다.' });
     }
 }
+
+module.exports = { group_post, group_edit, group_del, group_details, group_list };
