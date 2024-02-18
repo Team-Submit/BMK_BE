@@ -5,12 +5,11 @@ export const usedRepository = AppDataSoure.getRepository(Used);
 
 
 const used_post = async (req, res) => {
-    const { title, categori, floor, price, content, image, place, success, writer, wish } = req.body;
+    const { title, categori, price, content, image, place, success, writer, wish } = req.body;
 
     const newUsedPost = new Used();
     newUsedPost.title = title;
     newUsedPost.categori = categori;
-    newUsedPost.floor = floor;
     newUsedPost.price = price;
     newUsedPost.content = content;
     newUsedPost.image = image;
@@ -24,7 +23,7 @@ const used_post = async (req, res) => {
 };
 
 const used_edit = async (req, res) => {
-    const { id, title, categori, floor, price, content, image, place, success, writer, wish } = req.body;
+    const { id, title, categori, price, content, image, place, success, writer, wish } = req.body;
 
     if (!id) {
         return res.status(400).json({ message: 'id가 올바르지 않습니다.'});
@@ -33,7 +32,6 @@ const used_edit = async (req, res) => {
     const update = {
         title,
         categori,
-        floor,
         price,
         content,
         image,

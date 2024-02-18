@@ -11,14 +11,6 @@ enum Category {
     etc = '기타'
 }
 
-enum Floor {
-    first = '1층',
-    second = '2층',
-    third = '3층',
-    fourth = '4층',
-    fifth = '5층'
-}
-
 @Entity()
 export class Used {
     @PrimaryGeneratedColumn()
@@ -64,11 +56,4 @@ export class Used {
         default: Category.etc
     })
     categori!: Category;
-
-    @Column({
-        type: 'enum',
-        enum: Floor,
-        default: Floor.fifth
-    })
-    floor!: Floor;
 }
