@@ -64,3 +64,13 @@ exports.group_details = async (req, res) => {
 
     res.json(group);
 };
+
+exports.group_list = async (req, res) => {
+    try {
+        const groupList = await groupRepository.find();
+        res.json(groupList);
+    } catch (error) {
+        console.error('Error while fetching used list:', error);
+        res.status(500).json({ message: '서버에서 목록을 가져오는 중에 오류가 발생했습니다.' });
+    }
+}
