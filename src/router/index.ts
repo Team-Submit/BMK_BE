@@ -8,6 +8,7 @@ router.patch('/used/boards', Used.used_edit);
 router.delete('/used/boards', Used.used_del);
 router.get('/used/boards/:usedId', Used.used_details);
 router.get('/used/boards', Used.used_list);
+router.get('/used/search', Used.used_search);
 
 module.exports = router;
 
