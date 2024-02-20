@@ -9,6 +9,7 @@ router.delete('/used/boards', Used.used_del);
 router.get('/used/boards/:usedId', Used.used_details);
 router.get('/used/boards', Used.used_list);
 router.get('/used/search', Used.used_search);
+router.patch('/used/end', Used.used_end);
 
 module.exports = router;
 
