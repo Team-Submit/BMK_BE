@@ -79,4 +79,24 @@ const group_list = async (req, res) => {
     }
 }
 
-module.exports = { group_post, group_edit, group_del, group_details, group_list };
+const group_search = async (req, res) => {
+    const title = req.query;
+
+    if (!title) {
+        return res.status(400).json({ message: '제목을 입력해주세요.' });
+    }
+
+    try {
+        const searchResult = await groupRepository.find({ where: { title: title } });
+
+        if (searchResult.length === 0) {
+            return res.status(404).json({ message: '일치하는 게시물을 찾을 수 없습니다.' });
+        }
+
+        res.json(searchResult);
+    } catch (error) {
+        console.error('Error while searching by title:', error);
+        res.status(500).json({ message: '검색 중 오류가 발생했습니다.' });
+    }
+};
+module.exports = { group_post, group_edit, group_del, group_details, group_list, group_search };
