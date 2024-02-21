@@ -12,7 +12,7 @@ enum Category {
 }
 
 @Entity()
-export class Used {
+export default class Used {
     @PrimaryGeneratedColumn()
     used_id!: BigInt;
     

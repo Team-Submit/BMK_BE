@@ -1,5 +1,5 @@
 import { AppDataSoure } from "../models/dataSource";
-import { Used } from "../models/usedEntity";
+import Used from "../models/usedEntity";
 
 export const usedRepository = AppDataSoure.getRepository(Used);
 
