@@ -1,5 +1,5 @@
 import { AppDataSoure } from "../models/dataSource";
-import { Group } from '../models/group';
+import { Group } from '../models/group.entity';
 
 export const groupRepository = AppDataSoure.getRepository(Group);
 
@@ -99,4 +99,5 @@ const group_search = async (req, res) => {
         res.status(500).json({ message: '검색 중 오류가 발생했습니다.' });
     }
 };
+
 module.exports = { group_post, group_edit, group_del, group_details, group_list, group_search };
