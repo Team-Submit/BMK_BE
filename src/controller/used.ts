@@ -1,5 +1,5 @@
 import { AppDataSoure } from "../models/dataSource";
-import { Used } from "../models/used";
+import { Used } from "../models/usedEntity";
 
 export const usedRepository = AppDataSoure.getRepository(Used);
 
@@ -116,4 +116,21 @@ const used_end = async (req, res) => {
     }
 }
 
-module.exports = { used_post, used_edit, used_del, used_details, used_list, used_search, used_end };
+const used_picks = async (req, res) => {
+    try {
+        const usedItem = await usedRepository.findOne(req.used_id);
+        if (!usedItem) {
+            return res.status(404).json({ message: 'Used item not found.' });
+        }
+
+        usedItem.wish = true;
+        await usedRepository.save(usedItem);
+
+        res.status(200).json({ message: 'wish column updated successfully.' });
+    } catch (error) {
+        console.error('Error occurred:', error);
+        res.status(500).json({ message: 'Internal server error.' });
+    }
+}
+
+module.exports = { used_post, used_edit, used_del, used_details, used_list, used_search, used_end, used_picks };
