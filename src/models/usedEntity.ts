@@ -29,7 +29,7 @@ export default class Used {
     place!: string;
 
     @Column()
-    image!: string | null;
+    image!: string;
 
     @Column({
         default: true // success의 기본값을 true로 설정
@@ -42,7 +42,7 @@ export default class Used {
     @Column({
         default: false // wish의 기본값을 false로 설정
     })
-    wish!: boolean | null;
+    wish!: boolean;
 
     @Column()
     room_id!: string;
