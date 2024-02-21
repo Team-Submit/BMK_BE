@@ -1,15 +1,8 @@
-import express from 'express';
+import express, { Router } from 'express';
+import used from './used';
 
-const router = express.Router();
-const Used = require('controller/used');
+const router: Router = express.Router();
 
-router.post('/used/post', Used.used_post);
-router.patch('/used/boards', Used.used_edit);
-router.delete('/used/boards', Used.used_del);
-router.get('/used/boards/:usedId', Used.used_details);
-router.get('/used/boards', Used.used_list);
-router.get('/used/search', Used.used_search);
-router.patch('/used/end', Used.used_end);
+router.use('/used', used);
 
-module.exports = router;
-
+export default router;
