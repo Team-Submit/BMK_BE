@@ -55,7 +55,7 @@ const used_del = async (req, res) => {
 const used_details = async (req, res) => {
     const usedId = req.params.usedId;
 
-    const used = await usedRepository.findOne(usedId);
+    const used = await usedRepository.findOne({where: {used_id: usedId}});
 
     if (!used) {
         return res.status(404).json({ message: '글을 찾지 못했습니다.' });
@@ -75,7 +75,7 @@ const used_list = async (req, res) => {
 };
 
 const used_search = async (req, res) => {
-    const title = req.query;
+    const { title } = req.query;
 
     if (!title) {
         return res.status(400).json({ message: '제목을 입력해주세요.' });
@@ -97,7 +97,8 @@ const used_search = async (req, res) => {
 
 const used_end = async (req, res) => {
     try {
-        const usedItem = await usedRepository.findOne(req.used_id);
+        const usedItemId = req.params.usedId;
+        const usedItem = await usedRepository.findOne({ where: { used_id: usedItemId } });
         if (!usedItem) {
             return res.status(404).json({ message: 'Used item not found.' });
         }
@@ -114,7 +115,8 @@ const used_end = async (req, res) => {
 
 const used_picks = async (req, res) => {
     try {
-        const usedItem = await usedRepository.findOne(req.used_id);
+        const usedItemId = req.params.usedId;
+        const usedItem = await usedRepository.findOne({ where: { used_id: usedItemId } });
         if (!usedItem) {
             return res.status(404).json({ message: 'Used item not found.' });
         }

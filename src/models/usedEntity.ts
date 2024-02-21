@@ -46,11 +46,11 @@ export default class Used {
     })
     wish!: boolean;
 
-    @Column({type: 'varchar', unique: true})
-    room_id!: string;
+    // @Column({type: 'varchar', unique: true})
+    // room_id!: string;
 
-    @Column({type: 'boolean'})
-    review_check!: boolean;
+    // @Column({type: 'boolean'})
+    // review_check!: boolean;
 
     @Column({
         type: 'enum',
