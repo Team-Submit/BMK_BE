@@ -57,5 +57,5 @@ export default class Used {
         enum: Category,
         default: Category.etc
     })
-    categori!: Category;
+    category!: Category;
 }
