@@ -13,41 +13,43 @@ enum Category {
 
 @Entity()
 export default class Used {
-    @PrimaryGeneratedColumn()
-    used_id!: BigInt;
+    @PrimaryGeneratedColumn({type: 'bigint'})
+    used_id!: number;
     
-    @Column()
+    @Column({type: 'varchar'})
     title!: string;
 
-    @Column()
+    @Column({type: 'varchar'})
     content!: string;
 
-    @Column()
+    @Column({type: 'varchar'})
     price!: string;
 
-    @Column()
+    @Column({type: 'varchar'})
     place!: string;
 
-    @Column()
+    @Column({type: 'varchar'})
     image!: string;
 
     @Column({
+        type: 'boolean',
         default: true // success의 기본값을 true로 설정
     })
     success!: boolean;
 
-    @Column()
+    @Column({type: 'varchar'})
     writer!: string;
 
     @Column({
+        type: 'boolean',
         default: false // wish의 기본값을 false로 설정
     })
     wish!: boolean;
 
-    @Column()
+    @Column({type: 'varchar', unique: true})
     room_id!: string;
 
-    @Column()
+    @Column({type: 'boolean'})
     review_check!: boolean;
 
     @Column({
