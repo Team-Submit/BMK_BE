@@ -4,7 +4,7 @@ import { Group } from '../models/group.entity';
 export const groupRepository = AppDataSoure.getRepository(Group);
 
 const group_post = async (req, res) => {
-    const { title, categori, price, content, image, personnelAll, transactionDate, time, success, wish} = req.body;
+    const { title, categori, price, content, image, personnelAll, transactionDate, time, wish} = req.body;
 
     const newGroupPost = new Group();
     newGroupPost.title = title;
@@ -15,7 +15,6 @@ const group_post = async (req, res) => {
     newGroupPost.personnelAll = personnelAll;
     newGroupPost.transactionDate = transactionDate;
     newGroupPost.time = time;
-    newGroupPost.success = success;
     newGroupPost.wish = wish;
 
     const group = await groupRepository.save(newGroupPost);
@@ -23,7 +22,7 @@ const group_post = async (req, res) => {
 };
 
 const group_edit = async (req, res) => {
-     const {id, title, categori, price, content, image, personnelAll, transactionDate, time, success, wish} = req.body;
+     const {id, title, categori, price, content, image, personnelAll, transactionDate, time, wish} = req.body;
 
     if (!id) {
         return res.status(400).json({ message: 'id가 올바르지 않습니다.'});
@@ -37,7 +36,6 @@ const group_edit = async (req, res) => {
         image,
         personnelAll,
         transactionDate,
-        success,
         wish,
         time
     };
