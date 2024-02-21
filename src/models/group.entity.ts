@@ -12,38 +12,36 @@ enum Category {
 }
 
 @Entity()
-export class Group {
-    @PrimaryGeneratedColumn()
-    used_id!: BigInt;
+export default class Group {
+    @PrimaryGeneratedColumn({type: 'bigint'})
+    group_id!: number;
     
-    @Column()
+    @Column({type: 'varchar'})
     title!: string;
 
-    @Column()
+    @Column({type: 'varchar'})
     content!: string;
 
-    @Column()
+    @Column({type: 'varchar'})
     price!: string;
 
-    @Column()
-    place!: string;
+    @Column({type: 'varchar'})
+    personnelAll!: String;
 
-    @Column()
-    image!: string | null;
+    @Column({type: 'varchar'})
+    transactionDate!: String;
 
-    @Column()
-    personnelAll!: string;
+    @Column({type: 'varchar'})
+    image!: string;
 
-    @Column()
-    transactionDate!: string;
-
-    @Column({
-        default: false // wish의 기본값을 false로 설정
-    })
-    wish!: boolean | null;
-
-    @Column()
+    @Column({type: 'varchar'})
     time!: string;
+
+    @Column({type: 'varchar', unique: true})
+    room_id!: string;
+
+    @Column({type: 'boolean'})
+    review_check!: boolean;
 
     @Column({
         type: 'enum',
