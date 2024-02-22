@@ -21,7 +21,8 @@ const used_post = async (req, res) => {
 };
 
 const used_edit = async (req, res) => {
-    const { id, title, category, price, content, image, place, writer } = req.body;
+    const { title, category, price, content, image, place, writer } = req.body;
+    const id = req.params.id;
 
     if (!id) {
         return res.status(400).json({ message: 'id가 올바르지 않습니다.'});
@@ -42,7 +43,7 @@ const used_edit = async (req, res) => {
 };
 
 const used_del = async (req, res) => {
-    const { id } = req.body;
+    const id = req.params.id;
 
     if (!id) {
         return res.status(400).json({ message: 'id가 올바르지 않습니다.' });
