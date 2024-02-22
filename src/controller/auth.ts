@@ -1,12 +1,13 @@
 import { Response, Request } from "express";
 import { AppDataSoure } from "../models/dataSource";
 import User from "../models/user.entity";
-import bcrypt from "bcrypt";
+import bcrypt, { hashSync } from "bcrypt";
 import jwt from "jsonwebtoken";
 import { configDotenv } from "dotenv";
 import redisCli from "../../redis";
 import { createTransport } from 'nodemailer';
 import Email from "../models/email.entity";
+import validator from "validator";
 
 configDotenv();
 
@@ -157,4 +158,33 @@ const checkEmail = async (req: Request, res: Response) =>{
     }
 }
 
-export {logIn, sendEmail, checkEmail};
+const changePassword = async(req: Request, res: Response) =>{
+    const {email, password} = req.body;
+    const mailCheck = await IsEmail.findOneBy({email: email})
+
+    if(!validator.isEmail(email)){
+        return res.status(406).json({"error": "이메일 포맷에 맞춰주세요."})
+    }
+
+    if(mailCheck?.key !== "true"){
+        return res.status(404).json({
+            "error": "메일인증이 완료되지 않았습니다."
+        })
+    }
+
+    const hashed = hashSync(password, 10);
+
+    await IsUser.update({
+        email: email
+    },
+    {
+        password: hashed
+    })
+    await IsEmail.delete({email: email})
+
+    return res.status(200).json({
+        message: "비밀번호가 변경되었습니다."
+    })
+}
+
+export {logIn, sendEmail, checkEmail, changePassword};

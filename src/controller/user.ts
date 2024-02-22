@@ -33,6 +33,7 @@ const signUp = async (req:Request, res:Response) =>{
     const hashed = hashSync(password, 10);
 
     await IsUser.save({name: name, email: email, password: hashed, studentId, profile: profile})
+    await IsEmail.delete({email: email})
 
     return res.status(201).json({
         data:null,
