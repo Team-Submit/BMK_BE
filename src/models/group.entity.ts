@@ -44,6 +44,12 @@ export default class Group {
     review_check!: boolean;
 
     @Column({
+        type: 'boolean',
+        default: false // wish의 기본값을 false로 설정
+    })
+    wish!: boolean;
+
+    @Column({
         type: 'enum',
         enum: Category,
         default: Category.etc

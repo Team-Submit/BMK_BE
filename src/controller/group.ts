@@ -96,4 +96,22 @@ const group_search = async (req, res) => {
     }
 };
 
-module.exports = { group_post, group_edit, group_del, group_details, group_list, group_search };
+const group_picks = async (req, res) => {
+    try {
+        const groupItemId = req.params.groupId;
+        const groupItem = await groupRepository.findOne({ where: { group_id: groupItemId } });
+        if (!groupItem) {
+            return res.status(404).json({ message: 'group item not found.' });
+        }
+
+        groupItem.wish = true;
+        await groupRepository.save(groupItem);
+
+        res.status(200).json({ message: 'wish column updated successfully.' });
+    } catch (error) {
+        console.error('Error occurred:', error);
+        res.status(500).json({ message: 'Internal server error.' });
+    }
+}
+
+module.exports = { group_post, group_edit, group_del, group_details, group_list, group_search, group_picks };
