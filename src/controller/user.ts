@@ -41,4 +41,31 @@ const signUp = async (req:Request, res:Response) =>{
     })
 }
 
-export {signUp};
+const getUser = async (req:any, res:Response) =>{
+    try{
+        const {id} = req.payload;
+
+        const thisUser = await IsUser.findOneBy({id: id});
+
+        if(!thisUser){
+            res.status(404).json({
+                "error": "정보를 찾을 수 없습니다.",
+            })
+        }
+
+        return res.status(200).json({
+            name: thisUser?.name,
+            id: thisUser?.id,
+            studentId: thisUser?.studentId,
+            temperature: thisUser?.temperature,
+            profile: thisUser?.profile,
+        })
+    }
+    catch(err){
+        console.error(err)
+        return err
+    }
+}
+
+
+export {signUp, getUser};
