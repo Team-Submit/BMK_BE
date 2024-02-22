@@ -37,11 +37,11 @@ export default class Group {
     @Column({type: 'varchar'})
     time!: string;
 
-    @Column({type: 'varchar', unique: true})
-    room_id!: string;
+    //@Column({type: 'varchar', unique: true})
+    //room_id!: string;
 
-    @Column({type: 'boolean'})
-    review_check!: boolean;
+    //@Column({type: 'boolean'})
+    //review_check!: boolean;
 
     @Column({
         type: 'boolean',
