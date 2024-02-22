@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn, ManyToMany, JoinTable } from "typeorm";
+import User from "./user.entity";
 
 @Entity()
 export default class ChatRooms {
@@ -13,4 +14,8 @@ export default class ChatRooms {
 
     @Column({type: 'date'})
     createDate!: string;
+
+    @ManyToMany(() => User)
+    @JoinTable()
+    participants!: User[];
 }
