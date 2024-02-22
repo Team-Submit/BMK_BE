@@ -16,11 +16,11 @@ const signUp = async (req:Request, res:Response) =>{
         return res.status(406).json({"error": "이메일 포맷에 맞춰주세요."})
     }
 
-    if(await AppDataSoure.getRepository(User).findOneBy({email: email})){
+    if(await IsUser.findOneBy({email: email})){
         return res.status(409).json({"error": "이미 존재하는 이메일입니다."})
     }
 
-    if(await AppDataSoure.getRepository(User).findOneBy({studentId: studentId})){
+    if(await IsUser.findOneBy({studentId: studentId})){
         return res.status(409).json({"error": "이미 존재하는 학번입니다."})
     }
 
@@ -32,7 +32,7 @@ const signUp = async (req:Request, res:Response) =>{
 
     const hashed = hashSync(password, 10);
 
-    await AppDataSoure.getRepository(User).save({name: name, email: email, password: hashed, studentId, profile: profile})
+    await IsUser.save({name: name, email: email, password: hashed, studentId, profile: profile})
 
     return res.status(201).json({
         data:null,
@@ -41,4 +41,4 @@ const signUp = async (req:Request, res:Response) =>{
     })
 }
 
-export default {signUp};
+export {signUp};
