@@ -1,5 +1,5 @@
 import { Column, Entity, PrimaryGeneratedColumn, ManyToMany, JoinTable } from "typeorm";
-import User from "./user.entity";
+import User from "../models/user.entity";
 
 @Entity()
 export default class ChatRooms {
@@ -9,11 +9,11 @@ export default class ChatRooms {
     @Column({type: 'varchar'})
     roomName!: string;
 
-    @Column({type: 'int', unique: true})
-    userId!: number;
+    @Column({type: 'int', unique: true, default: 1})
+    studentId!: number;
 
-    @Column({type: 'date'})
-    createDate!: string;
+    @Column({type: 'timestamp', default: () => 'CURRENT_TIMESTAMP'})
+    createDate!: Date;
 
     @ManyToMany(() => User)
     @JoinTable()

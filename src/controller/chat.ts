@@ -102,17 +102,17 @@ const send_message = async (req, res) => {
             return res.status(404).json({ error: '사용자를 찾을 수 없습니다.' });
         }
 
-        const sendTime = new Date();
+        const sendTime = new Date().toISOString();
 
         const newMessage = chatMessagesRepository.create({
             roomId,
             senderId,
             content: message,
-            sendTime: sendTime.toISOString()
+            sendTime
         });
+        console.log(newMessage);
 
         await chatMessagesRepository.save(newMessage);
-
         return res.status(200).json({ message: '메시지를 성공적으로 전송했습니다.' });
     } catch (error) {
         console.error('메시지 전송 중 오류 발생:', error);

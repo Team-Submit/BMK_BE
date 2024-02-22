@@ -4,7 +4,7 @@ const router: Router = express.Router();
 const chat = require('../controller/chat');
 
 // 채팅방 만들기
-router.post('/:studentId', chat.create_room);
+router.post('/', chat.create_room);
 // 채팅방 목록 조회
 router.get('/room', chat.room_list);
 // 채팅방 메세지 조회
