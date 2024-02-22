@@ -6,5 +6,6 @@ const router: Router = express.Router();
 
 router.use('/members', user)
 router.use('/auth', auth)
+router.use('/chatting', )
 
 export default router;
