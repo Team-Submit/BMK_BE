@@ -4,11 +4,11 @@ import Group from '../models/group.entity';
 export const groupRepository = AppDataSoure.getRepository(Group);
 
 const group_post = async (req, res) => {
-    const { title, categori, price, content, image, personnelAll, transactionDate, time} = req.body;
+    const { title, category, price, content, image, personnelAll, transactionDate, time} = req.body;
 
     const newGroupPost = new Group();
     newGroupPost.title = title;
-    newGroupPost.categori = categori;
+    newGroupPost.category = category;
     newGroupPost.price = price;
     newGroupPost.content = content;
     newGroupPost.image = image;
@@ -21,7 +21,7 @@ const group_post = async (req, res) => {
 };
 
 const group_edit = async (req, res) => {
-     const {id, title, categori, price, content, image, personnelAll, transactionDate, time} = req.body;
+     const {id, title, category, price, content, image, personnelAll, transactionDate, time} = req.body;
 
     if (!id) {
         return res.status(400).json({ message: 'id가 올바르지 않습니다.'});
@@ -29,7 +29,7 @@ const group_edit = async (req, res) => {
 
     const update = {
         title,
-        categori,
+        category,
         price,
         content,
         image,
@@ -56,7 +56,7 @@ const group_del = async (req, res) => {
 const group_details = async (req, res) => {
     const groupId = req.params.groupId;
 
-    const group = await groupRepository.findOne(groupId);
+    const group = await groupRepository.findOne({where: {group_id: groupId}});
 
     if (!group) {
         return res.status(404).json({ message: '글을 찾지 못했습니다.' });
@@ -76,7 +76,7 @@ const group_list = async (req, res) => {
 }
 
 const group_search = async (req, res) => {
-    const title = req.query;
+    const { title } = req.query;
 
     if (!title) {
         return res.status(400).json({ message: '제목을 입력해주세요.' });

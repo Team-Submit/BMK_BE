@@ -54,5 +54,5 @@ export default class Group {
         enum: Category,
         default: Category.etc
     })
-    categori!: Category;
+    category!: Category;
 }
