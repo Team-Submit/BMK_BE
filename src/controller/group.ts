@@ -21,7 +21,8 @@ const group_post = async (req, res) => {
 };
 
 const group_edit = async (req, res) => {
-     const {id, title, category, price, content, image, personnelAll, transactionDate, time} = req.body;
+     const {title, category, price, content, image, personnelAll, transactionDate, time} = req.body;
+     const id = req.params.id;
 
     if (!id) {
         return res.status(400).json({ message: 'id가 올바르지 않습니다.'});
@@ -43,7 +44,7 @@ const group_edit = async (req, res) => {
 };
 
 const group_del = async (req, res) => {
-    const { id } = req.body;
+    const id = req.params.id;
 
     if (!id) {
         return res.status(400).json({ message: 'id가 올바르지 않습니다.'});
