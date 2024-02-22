@@ -12,7 +12,7 @@ export default class ChatRooms {
     @Column({type: 'int', unique: true, default: 1})
     studentId!: number;
 
-    @Column({type: 'timestamp', default: () => 'CURRENT_TIMESTAMP'})
+    @Column({type: 'datetime', default: () => 'CURRENT_TIMESTAMP'})
     createDate!: Date;
 
     @ManyToMany(() => User)

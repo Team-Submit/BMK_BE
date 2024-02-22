@@ -14,6 +14,6 @@ export default class ChatMessages{
     @Column({type: 'varchar'})
     content!: string;
 
-    @Column({type: 'date'})
-    sendTime!: string;
+    @Column({type: 'datetime'})
+    sendTime!: Date;
 }
