@@ -7,5 +7,3 @@ const Group = require('controller/group');
 router.use('/group', group);
 
 export default router;
-
-
