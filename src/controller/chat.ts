@@ -2,10 +2,12 @@ import { AppDataSoure } from "../models/dataSource";
 import ChatRooms from "../models/chatRoom.entity";
 import ChatMessages from "../models/chatMessages.entity";
 import User from "../models/user.entity";
+import Used from "../models/usedEntity";
 
 export const chatRoomRepository = AppDataSoure.getRepository(ChatRooms);
 export const chatMessagesRepository = AppDataSoure.getRepository(ChatMessages);
 export const userRepository = AppDataSoure.getRepository(User);
+export const usedRepository = AppDataSoure.getRepository(Used);
 
 // 채팅방 만들기
 const create_room = async (req, res) => {
@@ -76,6 +78,16 @@ const join_room = async (req, res) => {
         }
 
         room.participants.push(user);
+
+        try {
+            const used = await usedRepository.findOne({ where: { studentId } });
+            if (!used) {
+                await usedRepository.create({ studentId });
+            }
+        } catch (error) {
+            console.error('used 테이블에 저장 중 오류 발생:', error);
+            return res.status(500).json({ error: '사용자 정보를 저장하는 동안 오류가 발생했습니다.' });
+        }
 
         await chatRoomRepository.save(room);
 
