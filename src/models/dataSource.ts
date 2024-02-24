@@ -3,6 +3,7 @@ import { DataSource } from "typeorm";
 import "reflect-metadata"
 import User from "./user.entity";
 import Email from "./email.entity";
+import usedEntity from "./usedEntity";
 
 
 configDotenv();
@@ -18,6 +19,7 @@ export const AppDataSoure = new DataSource({
     logging: false,
     migrations: [],
     entities: [User, Email],
+    entities: [usedEntity],
     subscribers: [],
 });
 
@@ -30,3 +32,4 @@ export const AppDataSoure = new DataSource({
 // PASSWORD = '0000'
 // NAME = 'bmk_db'
 // PORT = 1234
+
