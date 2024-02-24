@@ -115,4 +115,4 @@ const group_picks = async (req, res) => {
     }
 }
 
-module.exports = { group_post, group_edit, group_del, group_details, group_list, group_search, group_picks };
+export { group_post, group_edit, group_del, group_details, group_list, group_search, group_picks };
