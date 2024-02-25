@@ -9,7 +9,7 @@ export default class ChatRooms {
     @Column({type: 'varchar'})
     roomName!: string;
 
-    @Column({type: 'int', unique: true, default: 1})
+    @Column({type: 'int', default: 1})
     studentId!: number;
 
     @Column({type: 'datetime', default: () => 'CURRENT_TIMESTAMP'})

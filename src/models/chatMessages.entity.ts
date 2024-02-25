@@ -5,10 +5,10 @@ export default class ChatMessages{
     @PrimaryGeneratedColumn({type: 'bigint'})
     messageId!: number;
     
-    @Column({type: 'bigint', unique: true})
+    @Column({type: 'bigint'})
     roomId!: number;
 
-    @Column({type: 'int', unique: true})
+    @Column({type: 'int'})
     senderId!: number;
 
     @Column({type: 'varchar'})
