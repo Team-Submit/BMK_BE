@@ -96,13 +96,13 @@ const used_list = async (req, res) => {
 };
 
 const used_search = async (req, res) => {
-    const { title } = req.query;
-
-    if (!title) {
-        return res.status(400).json({ message: '제목을 입력해주세요.' });
-    }
-
     try {
+        const { title } = req.query;
+
+        if (!title) {
+            return res.status(400).json({ message: '제목을 입력해주세요.' });
+        }
+
         const searchResult = await usedRepository.find({ where: { title: title } });
 
         if (searchResult.length === 0) {
