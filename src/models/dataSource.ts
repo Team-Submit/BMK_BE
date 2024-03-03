@@ -2,6 +2,9 @@ import { configDotenv } from "dotenv";
 import { DataSource } from "typeorm";
 import "reflect-metadata"
 import User from "./user.entity";
+import ChatRooms from "./chatRoom.entity";
+import ChatMessages from "./chatMessages.entity";
+import Used from "./usedEntity";
 import Email from "./email.entity";
 import Group from "./group.entity";
 import Used from "./usedEntity";
@@ -19,6 +22,7 @@ export const AppDataSoure = new DataSource({
     synchronize: true,
     logging: false,
     migrations: [],
+    entities: [User, ChatRooms, ChatMessages, Used],
     entities: [User, Email, Group, Used],
     subscribers: [],
 });
