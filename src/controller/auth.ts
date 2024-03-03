@@ -75,13 +75,13 @@ const sendEmail = async(req:Request, res:Response) =>{
     const emailRequestCheck = IsEmail.findOneBy({email: email});
     const emailSignCheck = IsUser.findOneBy({email: email});
 
-    if(!emailRequestCheck){
+    if(await emailRequestCheck){
         return res.status(403).json({
             "error": "이미 요청된 메일입니다."
         })
     }
 
-    if(!emailSignCheck){
+    if(await emailSignCheck){
         return res.status(403).json({
             "error": "이미 가입된 메일입니다."
         })
