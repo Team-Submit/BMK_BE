@@ -132,4 +132,4 @@ const used_picks = async (req, res) => {
     }
 }
 
-module.exports = { used_post, used_edit, used_del, used_details, used_list, used_search, used_end, used_picks };
+export { used_post, used_edit, used_del, used_details, used_list, used_search, used_end, used_picks };
