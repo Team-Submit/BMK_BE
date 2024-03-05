@@ -20,6 +20,6 @@ export default class User{
     @Column({type: 'integer', default: 36})
     temperature!: number;
 
-    @Column({type: 'varchar'})
+    @Column({type: 'varchar', default: '1234'})
     profile!: string;
 }

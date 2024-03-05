@@ -5,64 +5,84 @@ export const usedRepository = AppDataSoure.getRepository(Used);
 
 
 const used_post = async (req, res) => {
-    const { title, category, price, content, image, place, writer } = req.body;
+    try {
+        const { title, category, price, content, image, place, writer } = req.body;
 
-    const newUsedPost = new Used();
-    newUsedPost.title = title;
-    newUsedPost.category = category;
-    newUsedPost.price = price;
-    newUsedPost.content = content;
-    newUsedPost.image = image;
-    newUsedPost.place = place;
-    newUsedPost.writer = writer;
+        const newUsedPost = new Used();
+        newUsedPost.title = title;
+        newUsedPost.category = category;
+        newUsedPost.price = price;
+        newUsedPost.content = content;
+        newUsedPost.image = image;
+        newUsedPost.place = place;
+        newUsedPost.writer = writer;
 
-    const used = await usedRepository.save(newUsedPost);
-    return res.status(200).json(used);
+        const used = await usedRepository.save(newUsedPost);
+        return res.status(200).json(used);
+    } catch (error) {
+        console.error('Error while creating used list:', error);
+        res.status(500).json({ message: '서버에서 글을 생성하는 중에 오류가 발생했습니다.' });
+    }
 };
 
 const used_edit = async (req, res) => {
-    const { title, category, price, content, image, place, writer } = req.body;
-    const id = req.params.id;
+    try {
+        const { title, category, price, content, image, place, writer } = req.body;
+        const id = req.params.id;
 
-    if (!id) {
-        return res.status(400).json({ message: 'id가 올바르지 않습니다.'});
+        if (!id) {
+            return res.status(400).json({ message: 'id가 올바르지 않습니다.'});
+        }
+
+        const update = {
+            title,
+            category,
+            price,
+            content,
+            image,
+            place,
+            writer
+        };
+
+        const used = await usedRepository.update(id, update);
+        return res.status(200).json(used);
+    } catch (error) {
+        console.error('Error while editing used list:', error);
+        res.status(500).json({ message: '서버에서 글을 수정하는 중에 오류가 발생했습니다.' });
     }
-
-    const update = {
-        title,
-        category,
-        price,
-        content,
-        image,
-        place,
-        writer
-    };
-
-    const used = await usedRepository.update(id, update);
-    return res.status(200).json(used);
 };
 
 const used_del = async (req, res) => {
-    const id = req.params.id;
+    try {
+        const id = req.params.id;
 
-    if (!id) {
-        return res.status(400).json({ message: 'id가 올바르지 않습니다.' });
+        if (!id) {
+            return res.status(400).json({ message: 'id가 올바르지 않습니다.' });
+        }
+
+        const used = await usedRepository.delete(id);
+        return res.status(200).json(used);
+    } catch (error) {
+        console.error('Error while deleting used list:', error);
+        res.status(500).json({ message: '서버에서 글을 삭제하는 중에 오류가 발생했습니다.' });
     }
-
-    const used = await usedRepository.delete(id);
-    return res.status(200).json(used);
 };
 
 const used_details = async (req, res) => {
-    const usedId = req.params.usedId;
+    try {
+        const usedId = req.params.usedId;
 
-    const used = await usedRepository.findOne({where: {used_id: usedId}});
+        const used = await usedRepository.findOne({where: {used_id: usedId}});
 
-    if (!used) {
-        return res.status(404).json({ message: '글을 찾지 못했습니다.' });
+        if (!used) {
+            return res.status(404).json({ message: '글을 찾지 못했습니다.' });
+        }
+
+        res.json(used);
+    } catch (error) {
+        console.error('Error while bring used list:', error);
+        res.status(500).json({ message: '서버에서 글을 가져오는 중에 오류가 발생했습니다.' });
     }
-
-    res.json(used);
 };
 
 const used_list = async (req, res) => {
@@ -76,13 +96,13 @@ const used_list = async (req, res) => {
 };
 
 const used_search = async (req, res) => {
-    const { title } = req.query;
-
-    if (!title) {
-        return res.status(400).json({ message: '제목을 입력해주세요.' });
-    }
-
     try {
+        const { title } = req.query;
+
+        if (!title) {
+            return res.status(400).json({ message: '제목을 입력해주세요.' });
+        }
+
         const searchResult = await usedRepository.find({ where: { title: title } });
 
         if (searchResult.length === 0) {
@@ -132,4 +152,4 @@ const used_picks = async (req, res) => {
     }
 }
 
-module.exports = { used_post, used_edit, used_del, used_details, used_list, used_search, used_end, used_picks };
+export { used_post, used_edit, used_del, used_details, used_list, used_search, used_end, used_picks };

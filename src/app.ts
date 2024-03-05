@@ -8,6 +8,8 @@ import redisCli from '../redis';
 configDotenv();
 const app: Application = express();
 const port: number = Number(process.env.PORT) || 8000;
+const server = require('http').createServer(app);
+const io = require('socket.io')(server);
 
 // db설정
 AppDataSoure.initialize()
@@ -33,3 +35,9 @@ app.listen(port, async () => {
     await redisCli.connect()
     console.log(`App is listening on port ${port} !`)
 })
+
+// socket 설정
+
+io.on('connection', (socket) => {
+    console.log('새로운 사용자가 연결되었습니다.');
+});

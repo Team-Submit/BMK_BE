@@ -58,4 +58,7 @@ export default class Used {
         default: Category.etc
     })
     category!: Category;
+
+    @Column({type: 'varchar', unique: true})
+    studentId!: string;
 }

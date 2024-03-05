@@ -1,8 +1,8 @@
 import express, { Router } from "express";
-const { validationAccess } = require('../middleware/jwt');
+import { group_del, group_details, group_edit, group_list, group_picks, group_post, group_search } from "../controller/group";
+import { validationAccess } from "../middleware/jwt";
 
 const router: Router = express.Router();
-const Group = require('controller/group');
 
 router.post('/group/boards', validationAccess, Group.group_post);
 router.patch('/group/boards/:groupId', validationAccess, Group.group_edit);
