@@ -3,11 +3,13 @@ import ChatRooms from "../models/chatRoom.entity";
 import ChatMessages from "../models/chatMessages.entity";
 import User from "../models/user.entity";
 import Used from "../models/usedEntity";
+import Group from "../models/group.entity";
 
 export const chatRoomRepository = AppDataSoure.getRepository(ChatRooms);
 export const chatMessagesRepository = AppDataSoure.getRepository(ChatMessages);
 export const userRepository = AppDataSoure.getRepository(User);
 export const usedRepository = AppDataSoure.getRepository(Used);
+export const groupRepository = AppDataSoure.getRepository(Group);
 
 // 채팅방 만들기
 const create_room = async (req, res) => {
