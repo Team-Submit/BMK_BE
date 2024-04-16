@@ -1,0 +1,28 @@
+{
+  "ts-node": {
+    "esm": true
+  },
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "preserveValueImports": false,
+    "module": "CommonJS",
+    "target": "es2021",
+    "noImplicitAny": false,
+    "sourceMap": true,
+    "outDir": "scripts/",
+    "strict": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "esModuleInterop": true,
+    "lib": [
+      "ES2022"
+    ]
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/*.spec.ts"
+  ]
+}
